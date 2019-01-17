@@ -22,6 +22,8 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.title = New System.Windows.Forms.Label()
         Me.equation = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -43,6 +45,12 @@ Partial Class Form1
         Me.lbltext = New System.Windows.Forms.Label()
         Me.txt_root2 = New System.Windows.Forms.TextBox()
         Me.txt_root1 = New System.Windows.Forms.TextBox()
+        Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.ErrorProvider2 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.ErrorProvider3 = New System.Windows.Forms.ErrorProvider(Me.components)
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ErrorProvider2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ErrorProvider3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'title
@@ -247,11 +255,25 @@ Partial Class Form1
         Me.txt_root1.Size = New System.Drawing.Size(100, 20)
         Me.txt_root1.TabIndex = 25
         '
+        'ErrorProvider1
+        '
+        Me.ErrorProvider1.ContainerControl = Me
+        '
+        'ErrorProvider2
+        '
+        Me.ErrorProvider2.ContainerControl = Me
+        Me.ErrorProvider2.Icon = CType(resources.GetObject("ErrorProvider2.Icon"), System.Drawing.Icon)
+        '
+        'ErrorProvider3
+        '
+        Me.ErrorProvider3.ContainerControl = Me
+        Me.ErrorProvider3.Icon = CType(resources.GetObject("ErrorProvider3.Icon"), System.Drawing.Icon)
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(709, 454)
+        Me.ClientSize = New System.Drawing.Size(709, 320)
         Me.Controls.Add(Me.txt_root1)
         Me.Controls.Add(Me.txt_root2)
         Me.Controls.Add(Me.lbltext)
@@ -275,6 +297,9 @@ Partial Class Form1
         Me.Controls.Add(Me.title)
         Me.Name = "Form1"
         Me.Text = "Form1"
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ErrorProvider2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ErrorProvider3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -300,5 +325,8 @@ Partial Class Form1
     Friend WithEvents lbltext As System.Windows.Forms.Label
     Friend WithEvents txt_root2 As System.Windows.Forms.TextBox
     Friend WithEvents txt_root1 As System.Windows.Forms.TextBox
+    Friend WithEvents ErrorProvider1 As System.Windows.Forms.ErrorProvider
+    Friend WithEvents ErrorProvider2 As System.Windows.Forms.ErrorProvider
+    Friend WithEvents ErrorProvider3 As System.Windows.Forms.ErrorProvider
 
 End Class
