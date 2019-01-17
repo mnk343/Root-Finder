@@ -1,0 +1,10 @@
+C:\Users\mayan\Desktop\Root-Finder\Root-Finder\Root-Finder\bin\Debug\Root-Finder.exe.config
+C:\Users\mayan\Desktop\Root-Finder\Root-Finder\Root-Finder\bin\Debug\Root-Finder.exe
+C:\Users\mayan\Desktop\Root-Finder\Root-Finder\Root-Finder\bin\Debug\Root-Finder.pdb
+C:\Users\mayan\Desktop\Root-Finder\Root-Finder\Root-Finder\bin\Debug\Root-Finder.xml
+C:\Users\mayan\Desktop\Root-Finder\Root-Finder\Root-Finder\obj\Debug\Root_Finder.Form1.resources
+C:\Users\mayan\Desktop\Root-Finder\Root-Finder\Root-Finder\obj\Debug\Root_Finder.Resources.resources
+C:\Users\mayan\Desktop\Root-Finder\Root-Finder\Root-Finder\obj\Debug\Root-Finder.vbproj.GenerateResource.Cache
+C:\Users\mayan\Desktop\Root-Finder\Root-Finder\Root-Finder\obj\Debug\Root-Finder.exe
+C:\Users\mayan\Desktop\Root-Finder\Root-Finder\Root-Finder\obj\Debug\Root-Finder.xml
+C:\Users\mayan\Desktop\Root-Finder\Root-Finder\Root-Finder\obj\Debug\Root-Finder.pdb
