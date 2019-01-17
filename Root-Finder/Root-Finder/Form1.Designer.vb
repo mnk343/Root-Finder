@@ -22,7 +22,6 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.VScrollBar1 = New System.Windows.Forms.VScrollBar()
         Me.title = New System.Windows.Forms.Label()
         Me.equation = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -39,14 +38,12 @@ Partial Class Form1
         Me.btn_3 = New System.Windows.Forms.RadioButton()
         Me.btn_6 = New System.Windows.Forms.RadioButton()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.info = New System.Windows.Forms.Label()
+        Me.info2 = New System.Windows.Forms.Label()
+        Me.lbltext = New System.Windows.Forms.Label()
+        Me.txt_root2 = New System.Windows.Forms.TextBox()
+        Me.txt_root1 = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
-        '
-        'VScrollBar1
-        '
-        Me.VScrollBar1.Location = New System.Drawing.Point(685, 9)
-        Me.VScrollBar1.Name = "VScrollBar1"
-        Me.VScrollBar1.Size = New System.Drawing.Size(15, 285)
-        Me.VScrollBar1.TabIndex = 0
         '
         'title
         '
@@ -206,11 +203,60 @@ Partial Class Form1
         Me.Label2.TabIndex = 17
         Me.Label2.Text = "Please specify the number of digits required after decimal point"
         '
+        'info
+        '
+        Me.info.AutoSize = True
+        Me.info.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.info.Location = New System.Drawing.Point(12, 322)
+        Me.info.Name = "info"
+        Me.info.Size = New System.Drawing.Size(126, 20)
+        Me.info.TabIndex = 18
+        Me.info.Text = "This is not visible"
+        '
+        'info2
+        '
+        Me.info2.AutoSize = True
+        Me.info2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.info2.Location = New System.Drawing.Point(12, 358)
+        Me.info2.Name = "info2"
+        Me.info2.Size = New System.Drawing.Size(111, 20)
+        Me.info2.TabIndex = 19
+        Me.info2.Text = "The roots are :"
+        '
+        'lbltext
+        '
+        Me.lbltext.AutoSize = True
+        Me.lbltext.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbltext.Location = New System.Drawing.Point(233, 360)
+        Me.lbltext.Name = "lbltext"
+        Me.lbltext.Size = New System.Drawing.Size(36, 20)
+        Me.lbltext.TabIndex = 21
+        Me.lbltext.Text = "and"
+        '
+        'txt_root2
+        '
+        Me.txt_root2.Location = New System.Drawing.Point(276, 362)
+        Me.txt_root2.Name = "txt_root2"
+        Me.txt_root2.Size = New System.Drawing.Size(100, 20)
+        Me.txt_root2.TabIndex = 24
+        '
+        'txt_root1
+        '
+        Me.txt_root1.Location = New System.Drawing.Point(127, 358)
+        Me.txt_root1.Name = "txt_root1"
+        Me.txt_root1.Size = New System.Drawing.Size(100, 20)
+        Me.txt_root1.TabIndex = 25
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(709, 497)
+        Me.ClientSize = New System.Drawing.Size(709, 454)
+        Me.Controls.Add(Me.txt_root1)
+        Me.Controls.Add(Me.txt_root2)
+        Me.Controls.Add(Me.lbltext)
+        Me.Controls.Add(Me.info2)
+        Me.Controls.Add(Me.info)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.btn_6)
         Me.Controls.Add(Me.btn_3)
@@ -227,14 +273,12 @@ Partial Class Form1
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.equation)
         Me.Controls.Add(Me.title)
-        Me.Controls.Add(Me.VScrollBar1)
         Me.Name = "Form1"
         Me.Text = "Form1"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents VScrollBar1 As System.Windows.Forms.VScrollBar
     Friend WithEvents title As System.Windows.Forms.Label
     Friend WithEvents equation As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
@@ -251,5 +295,10 @@ Partial Class Form1
     Friend WithEvents btn_3 As System.Windows.Forms.RadioButton
     Friend WithEvents btn_6 As System.Windows.Forms.RadioButton
     Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents info As System.Windows.Forms.Label
+    Friend WithEvents info2 As System.Windows.Forms.Label
+    Friend WithEvents lbltext As System.Windows.Forms.Label
+    Friend WithEvents txt_root2 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_root1 As System.Windows.Forms.TextBox
 
 End Class
