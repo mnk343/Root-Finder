@@ -121,21 +121,21 @@
                     Dim show_a, show_b, show_c As String
 
                     If a < 0 Then
-                        show_a = "- " + CStr(a)
+                        show_a = "- " + CStr(-a)
                     Else
                         show_a = " + " + CStr(a)
                     End If
 
 
                     If b < 0 Then
-                        show_b = " - " + CStr(b)
+                        show_b = " - " + CStr(-b)
                     Else
                         show_b = " + " + CStr(b)
                     End If
 
 
                     If c < 0 Then
-                        show_c = "- " + CStr(c)
+                        show_c = "- " + CStr(-c)
                     Else
                         show_c = " + " + CStr(c)
                     End If
@@ -155,7 +155,31 @@
                     Dim D As Decimal
                     D = ((b * b) - (4 * a * c))
                     Label4.Visible = True
-                    Label4.Text = "discriminent(D)  = b² - 4ac = " + CStr(b) + " * " + CStr(b) + " - " + "4 *" + CStr(a) + " * " + CStr(c) + " = " + CStr(b * b) + " - " + CStr(4 * a * c) + " = " + CStr(D)
+
+                    Dim term_b As String
+                    If b < 0 Then
+                        term_b = "(" + CStr(b) + ")"
+                    Else
+                        term_b = CStr(b)
+                    End If
+
+                    Dim term_c As String
+                    If c < 0 Then
+                        term_c = "(" + CStr(c) + ")"
+                    Else
+                        term_c = CStr(c)
+                    End If
+
+                    Dim term_a As String
+                    If a < 0 Then
+                        term_a = "(" + CStr(a) + ")"
+                    Else
+                        term_a = CStr(a)
+                    End If
+
+
+
+                    Label4.Text = "discriminant(D)  = b² - 4ac = " + term_b + " * " + term_b + " - " + "4 *" + term_a + " * " + term_c + " = " + CStr(b * b) + " - " + CStr(4 * a * c) + " = " + CStr(D)
 
                     If D < 0 Then
 
@@ -171,8 +195,14 @@
                         root1 = D / (2 * a)
                         root1 = Math.Round(root1, precision)
 
-                        txt_root1.Text += " + " + CStr(root1) + " i"
-                        txt_root2.Text += " + " + CStr(-root1) + " i"
+                        If a < 0 Then
+                            txt_root1.Text += " - " + CStr(-root1) + " i"
+                            txt_root2.Text += " + " + CStr(-root1) + " i"
+
+                        Else
+                            txt_root1.Text += " + " + CStr(root1) + " i"
+                            txt_root2.Text += " - " + CStr(root1) + " i"
+                        End If
 
 
 
@@ -221,14 +251,14 @@
                         term2 += CStr(Math.Round(Math.Sqrt(D1), precision))
                     End If
 
-                    Label5.Text = "Ist root = (-b+√D)/(2 * a)" + " = (" + term1 + " + " + term2 + ") / ( 2 * " + CStr(Math.Round(a, precision)) + ")" + " = " + txt_root1.Text
+                    Label5.Text = "Ist root = (-b+√D)/(2 * a)" + " = (" + term1 + " + " + term2 + ") / ( 2 * " + term_a + ")" + " = " + txt_root1.Text
                     Label6.Visible = True
-                    Label6.Text = "2nd root = (-b-√D)/(2 * a)" + " = (" + term1 + " - " + term2 + ") / ( 2 * " + CStr(Math.Round(a, precision)) + ")" + " = " + txt_root2.Text
+                    Label6.Text = "2nd root = (-b-√D)/(2 * a)" + " = (" + term1 + " - " + term2 + ") / ( 2 * " + term_a + ")" + " = " + txt_root2.Text
 
 
 
                 End If
-              
+
             Catch ex1 As Exception
                 MessageBox.Show("Overflow condition!!")
             End Try
