@@ -6,6 +6,9 @@
 
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ErrorProvider1.SetError(input_a, "Empty String!!")
+        ErrorProvider1.SetError(input_b, "Empty String!!")
+        ErrorProvider1.SetError(input_c, "Empty String!!")
 
 
         flag = 1
@@ -604,6 +607,67 @@
 
     Private Sub btn_0_Click(sender As Object, e As EventArgs) Handles btn_0.Click
         Button1_Click(sender, e)
+
+    End Sub
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     End Sub
 End Class
