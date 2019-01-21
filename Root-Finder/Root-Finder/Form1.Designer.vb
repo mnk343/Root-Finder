@@ -227,7 +227,7 @@ Partial Class Form1
         '
         Me.info.AutoSize = True
         Me.info.Font = New System.Drawing.Font("Rockwell", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.info.Location = New System.Drawing.Point(346, 339)
+        Me.info.Location = New System.Drawing.Point(278, 340)
         Me.info.Name = "info"
         Me.info.Size = New System.Drawing.Size(149, 19)
         Me.info.TabIndex = 18
@@ -349,15 +349,16 @@ Partial Class Form1
         '
         'Timer1
         '
-        Me.Timer1.Interval = 40
+        Me.Timer1.Enabled = True
+        Me.Timer1.Interval = 1000
         '
         'Timer2
         '
-        Me.Timer2.Interval = 60
+        Me.Timer2.Interval = 40
         '
         'Timer3
         '
-        Me.Timer3.Interval = 90
+        Me.Timer3.Interval = 50
         '
         'Form1
         '

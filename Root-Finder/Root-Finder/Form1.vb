@@ -2,10 +2,13 @@
 
     Dim precision As Integer
     Dim ctr As Integer
+    Dim flag As Integer
+
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        ctr = 0
+
+        flag = 1
         Dim old As Padding = Me.Margin
         Me.Margin = New Padding(old.Left, old.Top, old.Right, 50)
 
@@ -26,6 +29,8 @@
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnClear.Click
 
+
+        flag = 1
         info.Visible = False
         info2.Visible = False
         txt_root1.Visible = False
@@ -58,11 +63,11 @@
         ErrorProvider1.SetError(input_c, "Empty String!!")
         ErrorProvider3.SetError(input_c, "")
 
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSolve.Click
-
-        
+        flag = 1
         Label3.Visible = False
         Label4.Visible = False
         Label5.Visible = False
@@ -94,9 +99,15 @@
                 a = CDec(input_a.Text)
                 b = CDec(input_b.Text)
                 c = CDec(input_c.Text)
-                Timer1.Start()
 
+                Timer1.Start()
                 If a = 0 Then
+                    info.BackColor = Color.White
+
+                    info.ForeColor = Color.Black
+
+                    MessageBox.Show("Warning : You have not enterd a quadratic equation !!")
+
                     If b = 0 Then
                         If c = 0 Then
                             info.Visible = True
@@ -116,8 +127,9 @@
                 Else
                     Dim root1 As Decimal
                     Dim root2 As Decimal
-
-
+                    flag = 0
+                    ctr = 0
+                    info2.Text = "The roots are : "
                     Dim show_a, show_b, show_c As String
 
                     If a < 0 Then
@@ -149,7 +161,7 @@
 
                     Dim D As Decimal
                     D = ((b * b) - (4 * a * c))
-                    
+
                     Dim term_b As String
                     If b < 0 Then
                         term_b = "(" + CStr(b) + ")"
@@ -174,6 +186,8 @@
                     If D < 0 Then
 
                         info.Text += "Imaginary"
+                        info.BackColor = Color.Yellow
+
                         D = Math.Sqrt(-D)
 
                         root1 = (-1 * b) / (2 * a)
@@ -197,6 +211,8 @@
 
 
                     ElseIf D = 0 Then
+                        info.BackColor = Color.GreenYellow
+
                         info.Text += "Equal"
                         root1 = -b / (2 * a)
                         root1 = Math.Round(root1, precision)
@@ -206,6 +222,9 @@
                         txt_root2.Text = CStr(root2)
 
                     Else
+                        info.BackColor = Color.OrangeRed
+                        info.ForeColor = Color.White
+
                         info.Text += "Distinct"
                         D = Math.Sqrt(D)
                         root1 = -b + D
@@ -533,29 +552,58 @@
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
-        ctr = ctr + 1
 
-        
-        If ctr >= Timer3.Interval Then
+        If flag = 0 Then
 
-            txt_root2.Visible = True
-            Timer1.Stop()
+            ctr = ctr + 1
+            If ctr >= 4 Then
 
-        ElseIf ctr > Timer2.Interval Then
+                ctr = 1
+                txt_root2.Visible = True
+                Timer1.Stop()
 
-            lbltext.Visible = True
+            ElseIf ctr = 3 Then
+                lbltext.Visible = True
 
-        ElseIf ctr >= Timer1.Interval Then
+            ElseIf ctr = 2 Then
 
-            info2.Text = CStr(ctr)
+                txt_root1.Visible = True
 
-            txt_root1.Visible = True
-
+            End If
         End If
 
     End Sub
 
+
     Private Sub txt_root1_TextChanged(sender As Object, e As EventArgs) Handles txt_root1.TextChanged
+
+    End Sub
+
+    Private Sub Timer3_Tick(sender As Object, e As EventArgs) Handles Timer3.Tick
+
+    End Sub
+
+    Private Sub info_Click(sender As Object, e As EventArgs) Handles info.Click
+
+    End Sub
+
+    Private Sub txt_root2_TextChanged(sender As Object, e As EventArgs) Handles txt_root2.TextChanged
+
+    End Sub
+
+    Private Sub btn_6_Click(sender As Object, e As EventArgs) Handles btn_6.Click
+
+        Button1_Click(sender, e)
+
+    End Sub
+
+    Private Sub btn_3_Click(sender As Object, e As EventArgs) Handles btn_3.Click
+        Button1_Click(sender, e)
+
+    End Sub
+
+    Private Sub btn_0_Click(sender As Object, e As EventArgs) Handles btn_0.Click
+        Button1_Click(sender, e)
 
     End Sub
 End Class
