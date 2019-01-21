@@ -5,12 +5,12 @@
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
+        ctr = 0
         Dim old As Padding = Me.Margin
         Me.Margin = New Padding(old.Left, old.Top, old.Right, 50)
 
         Me.AutoScroll = True
-
+       
         info.Visible = False
         info2.Visible = False
         Label3.Visible = False
@@ -61,6 +61,8 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSolve.Click
+
+        
         Label3.Visible = False
         Label4.Visible = False
         Label5.Visible = False
@@ -86,8 +88,183 @@
         Dim b As Decimal
         Dim c As Decimal
 
-        'If ctr < 3 Then
-        'MessageBox.Show("Cannot solve the equation. All inputs for coefficients are not correct. Please see the boxes with a cross sign!!")
+        Dim test1, test2, test3 As Decimal
+        If Decimal.TryParse(input_a.Text, test1) And Decimal.TryParse(input_b.Text, test2) And Decimal.TryParse(input_c.Text, test3) Then
+            Try
+                a = CDec(input_a.Text)
+                b = CDec(input_b.Text)
+                c = CDec(input_c.Text)
+                Timer1.Start()
+
+                If a = 0 Then
+                    If b = 0 Then
+                        If c = 0 Then
+                            info.Visible = True
+                            info.Text = " Infinite roots are possible for the equation 0 = 0 "
+                        Else
+                            info.Visible = True
+                            info.Text = " No roots exist for the equation " + CStr(c) + " = 0 "
+                        End If
+
+                    Else
+                        info.Visible = True
+                        info2.Visible = True
+                        info.Text = "The equation " + CStr(b) + "x + " + CStr(c) + " = 0 has one root . "
+                        info2.Text = " The only root is : " + CStr(Math.Round(-c / b, precision))
+
+                    End If
+                Else
+                    Dim root1 As Decimal
+                    Dim root2 As Decimal
+
+
+                    Dim show_a, show_b, show_c As String
+
+                    If a < 0 Then
+                        show_a = "- " + CStr(-a)
+                    Else
+                        show_a = " + " + CStr(a)
+                    End If
+
+
+                    If b < 0 Then
+                        show_b = " - " + CStr(-b)
+                    Else
+                        show_b = " + " + CStr(b)
+                    End If
+
+
+                    If c < 0 Then
+                        show_c = "- " + CStr(-c)
+                    Else
+                        show_c = " + " + CStr(c)
+                    End If
+
+                    info.Visible = True
+                    info.Text = "Nature of roots : "
+                    info2.Visible = True
+
+                    txt_root1.ReadOnly = True
+                    txt_root2.ReadOnly = True
+
+                    Dim D As Decimal
+                    D = ((b * b) - (4 * a * c))
+                    
+                    Dim term_b As String
+                    If b < 0 Then
+                        term_b = "(" + CStr(b) + ")"
+                    Else
+                        term_b = CStr(b)
+                    End If
+
+                    Dim term_c As String
+                    If c < 0 Then
+                        term_c = "(" + CStr(c) + ")"
+                    Else
+                        term_c = CStr(c)
+                    End If
+
+                    Dim term_a As String
+                    If a < 0 Then
+                        term_a = "(" + CStr(a) + ")"
+                    Else
+                        term_a = CStr(a)
+                    End If
+
+                    If D < 0 Then
+
+                        info.Text += "Imaginary"
+                        D = Math.Sqrt(-D)
+
+                        root1 = (-1 * b) / (2 * a)
+                        root1 = Math.Round(root1, precision)
+
+                        txt_root1.Text = CStr(root1)
+                        txt_root2.Text = CStr(root1)
+
+                        root1 = D / (2 * a)
+                        root1 = Math.Round(root1, precision)
+
+                        If a < 0 Then
+                            txt_root1.Text += " - " + CStr(-root1) + " i"
+                            txt_root2.Text += " + " + CStr(-root1) + " i"
+
+                        Else
+                            txt_root1.Text += " + " + CStr(root1) + " i"
+                            txt_root2.Text += " - " + CStr(root1) + " i"
+                        End If
+
+
+
+                    ElseIf D = 0 Then
+                        info.Text += "Equal"
+                        root1 = -b / (2 * a)
+                        root1 = Math.Round(root1, precision)
+                        root2 = root1
+
+                        txt_root1.Text = CStr(root1)
+                        txt_root2.Text = CStr(root2)
+
+                    Else
+                        info.Text += "Distinct"
+                        D = Math.Sqrt(D)
+                        root1 = -b + D
+                        root1 /= 2 * a
+
+                        root2 = -b - D
+                        root2 /= 2 * a
+
+                        root1 = Math.Round(root1, precision)
+                        root2 = Math.Round(root2, precision)
+
+                        txt_root1.Text = CStr(root1)
+                        txt_root2.Text = CStr(root2)
+
+                    End If
+                End If
+
+            Catch ex1 As Exception
+                MessageBox.Show("Overflow condition!!")
+            End Try
+        Else
+            MessageBox.Show("Cannot solve the equation. All inputs for coefficients are not correct. Please see the boxes with a cross sign!!")
+
+        End If
+
+    End Sub
+
+
+
+
+
+
+    Function dsadsa() As Single
+
+        Label3.Visible = False
+        Label4.Visible = False
+        Label5.Visible = False
+        Label6.Visible = False
+        Label7.Visible = False
+
+        info.Visible = False
+        info2.Visible = False
+        txt_root1.Visible = False
+        txt_root2.Visible = False
+        lbltext.Visible = False
+
+        If btn_0.Checked = True Then
+            precision = 0
+        ElseIf btn_3.Checked = True Then
+            precision = 3
+        Else
+            precision = 6
+        End If
+
+
+        Dim a As Decimal
+        Dim b As Decimal
+        Dim c As Decimal
+
         Dim test1, test2, test3 As Decimal
         If Decimal.TryParse(input_a.Text, test1) And Decimal.TryParse(input_b.Text, test2) And Decimal.TryParse(input_c.Text, test3) Then
             Try
@@ -115,8 +292,6 @@
                 Else
                     Dim root1 As Decimal
                     Dim root2 As Decimal
-
-                    Label3.Visible = True
 
                     Dim show_a, show_b, show_c As String
 
@@ -267,7 +442,7 @@
 
         End If
 
-    End Sub
+    End Function
 
     Private Sub input_a_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles input_a.Validating
 
@@ -354,5 +529,33 @@
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
         End
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+
+        ctr = ctr + 1
+
+        
+        If ctr >= Timer3.Interval Then
+
+            txt_root2.Visible = True
+            Timer1.Stop()
+
+        ElseIf ctr > Timer2.Interval Then
+
+            lbltext.Visible = True
+
+        ElseIf ctr >= Timer1.Interval Then
+
+            info2.Text = CStr(ctr)
+
+            txt_root1.Visible = True
+
+        End If
+
+    End Sub
+
+    Private Sub txt_root1_TextChanged(sender As Object, e As EventArgs) Handles txt_root1.TextChanged
+
     End Sub
 End Class
