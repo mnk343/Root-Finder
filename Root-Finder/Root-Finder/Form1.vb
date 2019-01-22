@@ -106,6 +106,7 @@
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSolve.Click
         Chart1.Visible = False
         status = 1
+        Me.Height = 370
 
         check = -1
         btnPrev.Visible = False
@@ -147,9 +148,10 @@
                 a = CDec(input_a.Text)
                 b = CDec(input_b.Text)
                 c = CDec(input_c.Text)
-                Me.Height = 500
 
                 Timer1.Start()
+                Me.Height = 500
+
                 If a = 0 Then
                     info.BackColor = Color.White
 
@@ -300,11 +302,6 @@
         End If
 
     End Sub
-
-
-
-
-
 
     Function dsadsa() As Single
 
@@ -1200,13 +1197,79 @@
         check = -1
 
 
+        If btn_0.Checked = True Then
+            precision = 0
+        ElseIf btn_3.Checked = True Then
+            precision = 3
+        Else
+            precision = 6
+        End If
 
 
+        Dim a As Decimal
+        Dim b As Decimal
+        Dim c As Decimal
+
+        Dim test1, test2, test3 As Decimal
+        If Decimal.TryParse(input_a.Text, test1) And Decimal.TryParse(input_b.Text, test2) And Decimal.TryParse(input_c.Text, test3) Then
+            Try
+                a = CDec(input_a.Text)
+                b = CDec(input_b.Text)
+                c = CDec(input_c.Text)
+
+                Dim vertex As Decimal
+                If a = 0 Then
+                    If b = 0 Then
+                        vertex = 0
+                    Else
+                        vertex = -c / b
+                    End If
+                Else
+                    vertex = -b / (2 * a)
+                End If
+                Math.Round(vertex, precision)
+                Chart1.Titles.Add("Plot of equation")
+                Chart1.ChartAreas.Clear()
+                Chart1.ChartAreas.Add("Default")
+
+                With Chart1.ChartAreas("Default")
+                    .AxisX.Title = "X"
+                    .AxisX.MajorGrid.LineColor = Color.SkyBlue
+                    .AxisY.MajorGrid.LineColor = Color.SkyBlue
+                    .AxisY.Title = "Y"
+                End With
+
+                'specify series plot lines
+                Chart1.Series.Clear()
+                Chart1.Series.Add("plot1")
+                Chart1.Series("plot1").Color = Color.Red
+                Chart1.Series("plot1").ChartType = DataVisualization.Charting.SeriesChartType.Line
+
+                'add data to the series
 
 
+                Dim left As Decimal = vertex - 5
+                Dim right As Decimal = vertex + 5
+                Dim y As Single
+                For x As Decimal = left To right Step 0.1
+
+                    y = a * x * x + b * x + c
+                    Chart1.Series("plot1").Points.AddXY(x, y)
+                Next
+
+            Catch ex As Exception
+                MessageBox.Show("An error occured")
 
 
+            End Try
 
+        Else
+            Me.Height = 375
+            Chart1.Visible = False
+            MessageBox.Show("Invalid Input. Please read the instructions carefully")
+
+
+        End If
     End Sub
 
     Private Sub btn_0_CheckedChanged(sender As Object, e As EventArgs) Handles btn_0.CheckedChanged
