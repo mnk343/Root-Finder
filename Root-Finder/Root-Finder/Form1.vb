@@ -5,7 +5,7 @@
     Dim ctr2 As Integer
     Dim flag As Integer
     Dim check As Integer
-
+    
     Dim a_step, b_step, c_step As Decimal
 
 
@@ -13,6 +13,10 @@
         ErrorProvider1.SetError(input_a, "Empty String!!")
         ErrorProvider1.SetError(input_b, "Empty String!!")
         ErrorProvider1.SetError(input_c, "Empty String!!")
+
+        btnPrev.Visible = False
+        see_again.Visible = False
+        btnNext.Visible = False
 
 
         flag = 1
@@ -39,7 +43,15 @@
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        btnPrev.Visible = False
+        see_again.Visible = False
+        btnNext.Visible = False
 
+        txt_root1.Visible = False
+        txt_root2.Visible = False
+        Label7.Visible = False
+        lbltext.Visible = False
+        info2.Visible = False
 
         flag = 1
         info.Visible = False
@@ -78,6 +90,11 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSolve.Click
+
+        check = -1
+        btnPrev.Visible = False
+        see_again.Visible = False
+        btnNext.Visible = False
         flag = 1
         Label3.Visible = False
         lbl_step.Visible = False
@@ -632,6 +649,17 @@
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
 
+        flag = -1
+        info2.Visible = False
+        txt_root1.Visible = False
+        txt_root2.Visible = False
+        Label7.Visible = False
+        lbltext.Visible = False
+
+        btnPrev.Visible = True
+        see_again.Visible = True
+        btnNext.Visible = True
+
         If btn_0.Checked = True Then
             precision = 0
         ElseIf btn_3.Checked = True Then
@@ -756,6 +784,14 @@
                 Label8.Visible = True
             End If
 
+        ElseIf check = 3 Then
+            If ctr2 = 1 Then
+                Label5.Visible = True
+            ElseIf ctr2 = 2 Then
+                Label4.Visible = True
+            ElseIf ctr2 = 3 Then
+                Label8.Visible = True
+            End If
 
 
         End If
@@ -763,6 +799,8 @@
     End Sub
 
     Private Sub step1(sender As Object, e As EventArgs)
+
+        lbl_step.Text = "Step 1 : "
 
         Label5.Visible = False
         Dim D As Decimal
@@ -891,32 +929,88 @@
         Label4.Text = " = (" + term1 + " + " + term2 + ") / ( 2 * " + term_a + ")"
         Label8.Text = " = " + txt_root1.Text
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
     End Sub
 
     Private Sub step3(sender As Object, e As EventArgs)
 
+        check = 3
+
+        Dim root2 As Decimal
+
+        txt_root2.Text = String.Empty
+
+        Dim D As Decimal
+        D = ((b_step * b_step) - (4 * a_step * c_step))
+
+        If D < 0 Then
+
+            root2 = (-1 * b_step) / (2 * a_step)
+            root2 = Math.Round(root2, precision)
+
+            txt_root2.Text = CStr(root2)
+
+            D = Math.Sqrt(-D)
+            root2 = D / (2 * a_step)
+            root2 = Math.Round(root2, precision)
+            If a_step < 0 Then
+                txt_root2.Text += " + " + CStr(-root2) + " i"
+
+            Else
+                txt_root2.Text += " - " + CStr(root2) + " i"
+
+            End If
+
+
+        ElseIf D = 0 Then
+            root2 = -b_step / (2 * a_step)
+            root2 = Math.Round(root2, precision)
+
+            txt_root2.Text = CStr(root2)
+        Else
+            D = Math.Sqrt(D)
+            root2 = -b_step + D
+            root2 /= 2 * a_step
+
+            root2 = Math.Round(root2, precision)
+
+            txt_root2.Text = CStr(root2)
+
+        End If
+
+        lbl_step.Text = "Step 3 : "
+        ctr2 = 0
+
+        Dim term_a As String
+        If a_step < 0 Then
+            term_a = "(" + CStr(a_step) + ")"
+        Else
+            term_a = CStr(a_step)
+        End If
+
+        Dim D1 As Decimal
+
+        D1 = ((b_step * b_step) - (4 * a_step * c_step))
+
+        Dim term1 As String
+        If b_step < 0 Then
+            term1 = CStr(-1 * b_step)
+        Else
+            term1 = "-" + CStr(b_step)
+        End If
+
+        Dim term2 As String
+        term2 = ""
+        If D1 < 0 Then
+            term2 += CStr(Math.Round(Math.Sqrt(-D1), precision)) + " i "
+        Else
+            term2 += CStr(Math.Round(Math.Sqrt(D1), precision))
+        End If
+
+
+        Label5.Text = "2nd root = (-b-√D)/(2 * a)"
+        Label4.Text = " = (" + term1 + " + " + term2 + ") / ( 2 * " + term_a + ")"
+        Label8.Text = " = " + txt_root2.Text
 
 
     End Sub
@@ -933,15 +1027,10 @@
         ElseIf lbl_step.Text = "Step 2 : " Then
             step2(sender, e)
 
-
+        ElseIf lbl_step.Text = "Step 3 : " Then
+            step3(sender, e)
 
         End If
-
-
-
-
-
-
 
     End Sub
     Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
@@ -956,7 +1045,45 @@
 
             step2(sender, e)
 
+        ElseIf lbl_step.Text = "Step 2 : " Then
+            Label6.Visible = False
+            Label4.Visible = False
+            Label8.Visible = False
+            check = 3
+            step3(sender, e)
 
+        ElseIf lbl_step.Text = "Step 2 : " Then
+            MessageBox.Show("Hurray!! You have reached the last step !!")
+
+        End If
+
+
+    End Sub
+
+    Private Sub btnPrev_Click(sender As Object, e As EventArgs) Handles btnPrev.Click
+        If lbl_step.Text = "Step 1 : " Then
+
+            MessageBox.Show("You are already on the first step !!")
+
+        ElseIf lbl_step.Text = "Step 2 : " Then
+
+            check = 1
+
+            Label6.Visible = False
+            Label4.Visible = False
+            Label8.Visible = False
+
+            step1(sender, e)
+
+        ElseIf lbl_step.Text = "Step 3 : " Then
+
+            check = 2
+
+            Label6.Visible = False
+            Label4.Visible = False
+            Label8.Visible = False
+
+            step2(sender, e)
 
         End If
 

@@ -61,6 +61,7 @@ Partial Class Form1
         Me.Label8 = New System.Windows.Forms.Label()
         Me.see_again = New System.Windows.Forms.Button()
         Me.btnNext = New System.Windows.Forms.Button()
+        Me.btnPrev = New System.Windows.Forms.Button()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ErrorProvider2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ErrorProvider3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -231,7 +232,7 @@ Partial Class Form1
         '
         Me.info.AutoSize = True
         Me.info.Font = New System.Drawing.Font("Rockwell", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.info.Location = New System.Drawing.Point(319, 628)
+        Me.info.Location = New System.Drawing.Point(299, 331)
         Me.info.Name = "info"
         Me.info.Size = New System.Drawing.Size(149, 19)
         Me.info.TabIndex = 18
@@ -241,7 +242,7 @@ Partial Class Form1
         '
         Me.info2.AutoSize = True
         Me.info2.Font = New System.Drawing.Font("Rockwell", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.info2.Location = New System.Drawing.Point(114, 665)
+        Me.info2.Location = New System.Drawing.Point(94, 368)
         Me.info2.Name = "info2"
         Me.info2.Size = New System.Drawing.Size(115, 19)
         Me.info2.TabIndex = 19
@@ -251,7 +252,7 @@ Partial Class Form1
         '
         Me.lbltext.AutoSize = True
         Me.lbltext.Font = New System.Drawing.Font("Rockwell", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbltext.Location = New System.Drawing.Point(515, 665)
+        Me.lbltext.Location = New System.Drawing.Point(495, 368)
         Me.lbltext.Name = "lbltext"
         Me.lbltext.Size = New System.Drawing.Size(37, 19)
         Me.lbltext.TabIndex = 21
@@ -260,7 +261,7 @@ Partial Class Form1
         'txt_root2
         '
         Me.txt_root2.Font = New System.Drawing.Font("Rockwell", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt_root2.Location = New System.Drawing.Point(619, 661)
+        Me.txt_root2.Location = New System.Drawing.Point(599, 364)
         Me.txt_root2.Name = "txt_root2"
         Me.txt_root2.Size = New System.Drawing.Size(136, 30)
         Me.txt_root2.TabIndex = 24
@@ -268,7 +269,7 @@ Partial Class Form1
         'txt_root1
         '
         Me.txt_root1.Font = New System.Drawing.Font("Rockwell", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt_root1.Location = New System.Drawing.Point(303, 659)
+        Me.txt_root1.Location = New System.Drawing.Point(283, 362)
         Me.txt_root1.Name = "txt_root1"
         Me.txt_root1.Size = New System.Drawing.Size(154, 32)
         Me.txt_root1.TabIndex = 25
@@ -387,7 +388,7 @@ Partial Class Form1
         'see_again
         '
         Me.see_again.Font = New System.Drawing.Font("Ravie", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.see_again.Location = New System.Drawing.Point(143, 565)
+        Me.see_again.Location = New System.Drawing.Point(303, 566)
         Me.see_again.Name = "see_again"
         Me.see_again.Size = New System.Drawing.Size(184, 47)
         Me.see_again.TabIndex = 40
@@ -397,18 +398,29 @@ Partial Class Form1
         'btnNext
         '
         Me.btnNext.Font = New System.Drawing.Font("Ravie", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNext.Location = New System.Drawing.Point(425, 565)
+        Me.btnNext.Location = New System.Drawing.Point(565, 565)
         Me.btnNext.Name = "btnNext"
         Me.btnNext.Size = New System.Drawing.Size(177, 47)
         Me.btnNext.TabIndex = 41
         Me.btnNext.Text = "Next"
         Me.btnNext.UseVisualStyleBackColor = True
         '
+        'btnPrev
+        '
+        Me.btnPrev.Font = New System.Drawing.Font("Ravie", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPrev.Location = New System.Drawing.Point(56, 566)
+        Me.btnPrev.Name = "btnPrev"
+        Me.btnPrev.Size = New System.Drawing.Size(184, 47)
+        Me.btnPrev.TabIndex = 42
+        Me.btnPrev.Text = "Previous"
+        Me.btnPrev.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(811, 703)
+        Me.Controls.Add(Me.btnPrev)
         Me.Controls.Add(Me.btnNext)
         Me.Controls.Add(Me.see_again)
         Me.Controls.Add(Me.Label8)
@@ -486,5 +498,6 @@ Partial Class Form1
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents btnNext As System.Windows.Forms.Button
     Friend WithEvents see_again As System.Windows.Forms.Button
+    Friend WithEvents btnPrev As System.Windows.Forms.Button
 
 End Class
