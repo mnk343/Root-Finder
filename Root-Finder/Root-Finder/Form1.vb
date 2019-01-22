@@ -1213,7 +1213,6 @@
                     vertex = -b / (2 * a)
                 End If
                 Math.Round(vertex, precision)
-                Chart1.Titles.Add("Plot of equation")
                 Chart1.ChartAreas.Clear()
                 Chart1.ChartAreas.Add("Default")
 
@@ -1226,18 +1225,18 @@
 
                 'specify series plot lines
                 Chart1.Series.Clear()
-                Chart1.Series.Add("plot1")
-                Chart1.Series("plot1").Color = Color.Red
-                Chart1.Series("plot1").ChartType = DataVisualization.Charting.SeriesChartType.Line
+                Chart1.Series.Add("plot")
+                Chart1.Series("plot").Color = Color.Red
+                Chart1.Series("plot").ChartType = DataVisualization.Charting.SeriesChartType.Line
 
                 'add data to the series
 
 
                 Dim left As Decimal = vertex - 5
                 Dim right As Decimal = vertex + 5
-                Dim y As Single
-                For x As Decimal = left To right Step 0.1
+                Dim y As Decimal
 
+                For x As Decimal = left To right Step 0.1
                     y = a * x * x + b * x + c
                     Chart1.Series("plot1").Points.AddXY(x, y)
                 Next
