@@ -2,7 +2,11 @@
 
     Dim precision As Integer
     Dim ctr As Integer
+    Dim ctr2 As Integer
     Dim flag As Integer
+    Dim check As Integer
+
+    Dim a_step, b_step, c_step As Decimal
 
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -20,9 +24,13 @@
         info.Visible = False
         info2.Visible = False
         Label3.Visible = False
-        Label4.Visible = False
+        lbl_step.Visible = False
         Label5.Visible = False
         Label6.Visible = False
+        Label8.Visible = False
+        Label4.Visible = False
+        Label5.Visible = False
+
         Label7.Visible = False
         txt_root1.Visible = False
         txt_root2.Visible = False
@@ -41,7 +49,7 @@
         lbltext.Visible = False
 
         Label3.Visible = False
-        Label4.Visible = False
+        lbl_step.Visible = False
         Label5.Visible = False
         Label7.Visible = False
 
@@ -72,9 +80,13 @@
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSolve.Click
         flag = 1
         Label3.Visible = False
-        Label4.Visible = False
+        lbl_step.Visible = False
         Label5.Visible = False
         Label6.Visible = False
+        Label8.Visible = False
+        Label4.Visible = False
+        Label5.Visible = False
+
         Label7.Visible = False
 
         info.Visible = False
@@ -263,9 +275,13 @@
     Function dsadsa() As Single
 
         Label3.Visible = False
-        Label4.Visible = False
+        lbl_step.Visible = False
         Label5.Visible = False
         Label6.Visible = False
+        Label8.Visible = False
+        Label4.Visible = False
+        Label5.Visible = False
+
         Label7.Visible = False
 
         info.Visible = False
@@ -351,7 +367,7 @@
 
                     Dim D As Decimal
                     D = ((b * b) - (4 * a * c))
-                    Label4.Visible = True
+                    lbl_step.Visible = True
 
                     Dim term_b As String
                     If b < 0 Then
@@ -376,7 +392,7 @@
 
 
 
-                    Label4.Text = "discriminant(D)  = b² - 4ac = " + term_b + " * " + term_b + " - " + "4 *" + term_a + " * " + term_c + " = " + CStr(b * b) + " - " + CStr(4 * a * c) + " = " + CStr(D)
+                    lbl_step.Text = "discriminant(D)  = b² - 4ac = " + term_b + " * " + term_b + " - " + "4 *" + term_a + " * " + term_c + " = " + CStr(b * b) + " - " + CStr(4 * a * c) + " = " + CStr(D)
 
                     If D < 0 Then
 
@@ -450,6 +466,10 @@
 
                     Label5.Text = "Ist root = (-b+√D)/(2 * a)" + " = (" + term1 + " + " + term2 + ") / ( 2 * " + term_a + ")" + " = " + txt_root1.Text
                     Label6.Visible = True
+                    Label8.Visible = True
+                    Label4.Visible = True
+                    Label5.Visible = True
+
                     Label6.Text = "2nd root = (-b-√D)/(2 * a)" + " = (" + term1 + " - " + term2 + ") / ( 2 * " + term_a + ")" + " = " + txt_root2.Text
 
 
@@ -536,7 +556,7 @@
     Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
 
     End Sub
-    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
+    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles lbl_step.Click
 
     End Sub
     Private Sub Label5_Click(sender As Object, e As EventArgs) Handles Label5.Click
@@ -612,6 +632,272 @@
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
 
+        Dim a As Decimal
+        Dim b As Decimal
+        Dim c As Decimal
+
+        Dim test1, test2, test3 As Decimal
+        If Decimal.TryParse(input_a.Text, test1) And Decimal.TryParse(input_b.Text, test2) And Decimal.TryParse(input_c.Text, test3) Then
+            Try
+
+                a = CDec(input_a.Text)
+                b = CDec(input_b.Text)
+                c = CDec(input_c.Text)
+
+
+                If a = 0 Then
+                    MessageBox.Show("Warning : You have not entered a quadratic equation !!")
+                    If b = 0 Then
+                        If c = 0 Then
+                            info.Visible = True
+                            info.Text = " Infinite roots are possible for the equation 0 = 0 "
+                        Else
+                            info.Visible = True
+                            info.Text = " No roots exist for the equation " + CStr(c) + " = 0 "
+                        End If
+
+                    Else
+                        info.Visible = True
+                        info2.Visible = True
+                        info.Text = "The equation " + CStr(b) + "x + " + CStr(c) + " = 0 has one root . "
+                        info2.Text = " The only root is : " + CStr(Math.Round(-c / b, precision))
+
+                    End If
+                Else
+                    Dim show_a, show_b, show_c As String
+
+                    If a < 0 Then
+                        show_a = "- " + CStr(-a)
+                    Else
+                        show_a = " + " + CStr(a)
+                    End If
+
+
+                    If b < 0 Then
+                        show_b = " - " + CStr(-b)
+                    Else
+                        show_b = " + " + CStr(b)
+                    End If
+
+
+                    If c < 0 Then
+                        show_c = "- " + CStr(-c)
+                    Else
+                        show_c = " + " + CStr(c)
+                    End If
+
+                    Label7.Text = show_a + " x²" + show_b + " x" + show_c + " = 0"
+                    Label7.Visible = True
+
+                    visualize(sender, a, b, c, e)
+
+                End If
+
+            Catch ex As Exception
+                MessageBox.Show("Error:Overflow Situation !! ")
+                Label7.Visible = False
+            End Try
+        Else
+            MessageBox.Show("Error:Overflow Situation !! ")
+            Label7.Visible = False
+
+        End If
+
+
+
+    End Sub
+
+    Private Sub visualize(sender As Object, ByVal a As Integer, ByVal b As Integer, ByVal c As Integer, e As EventArgs)
+
+        lbl_step.Text = "Step 1 : "
+        lbl_step.Visible = True
+        Label6.Visible = False
+        Label8.Visible = False
+        Label4.Visible = False
+        Label5.Visible = False
+
+        a_step = a
+        b_step = b
+        c_step = c
+
+
+        step1(sender, e)
+
+    End Sub
+
+    Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
+
+        ctr2 += 1
+
+        If check = 1 Then
+
+            If ctr2 = 1 Then
+                Label6.Visible = True
+            ElseIf ctr2 = 2 Then
+                Label4.Visible = True
+            ElseIf ctr2 = 3 Then
+                Label8.Visible = True
+            End If
+
+        ElseIf check = 2 Then
+
+            If ctr2 = 1 Then
+                Label5.Visible = True
+            ElseIf ctr2 = 2 Then
+                Label4.Visible = True
+            ElseIf ctr2 = 3 Then
+                Label8.Visible = True
+            End If
+
+
+
+        End If
+
+    End Sub
+
+    Private Sub step1(sender As Object, e As EventArgs)
+
+        Label5.Visible = False
+        Dim D As Decimal
+        Try
+            D = ((b_step * b_step) - (4 * a_step * c_step))
+
+        Catch ex As Exception
+            MessageBox.Show("Overflow has occured !! Please try another input !!")
+            Button2_Click(sender, e)
+
+        End Try
+
+
+        Dim term_b As String
+        If b_step < 0 Then
+            term_b = "(" + CStr(b_step) + ")"
+        Else
+            term_b = CStr(b_step)
+        End If
+
+        Dim term_c As String
+        If c_step < 0 Then
+            term_c = "(" + CStr(c_step) + ")"
+        Else
+            term_c = CStr(c_step)
+        End If
+
+        Dim term_a As String
+        If a_step < 0 Then
+            term_a = "(" + CStr(a_step) + ")"
+        Else
+            term_a = CStr(a_step)
+        End If
+
+        Label6.Text = "discriminant(D)  = b² - 4ac = " + term_b + " * " + term_b + " - " + "4 *" + term_a + " * " + term_c
+        Label4.Text = "= " + CStr(b_step * b_step) + " - " + CStr(4 * a_step * c_step)
+        Label8.Text = "= " + CStr(D)
+
+
+
+        check = 1
+        ctr2 = 0
+        Timer2.Start()
+
+
+    End Sub
+
+    Private Sub step2(sender As Object, e As EventArgs)
+
+
+        Dim root1 As Decimal
+
+
+        Dim D As Decimal
+        D = ((b_step * b_step) - (4 * a_step * c_step))
+
+        If D < 0 Then
+
+            root1 = (-1 * b_step) / (2 * a_step)
+            root1 = Math.Round(root1, precision)
+
+            txt_root1.Text = CStr(root1)
+            txt_root2.Text = CStr(root1)
+
+            root1 = D / (2 * a_step)
+            root1 = Math.Round(root1, precision)
+
+            If a_step < 0 Then
+                txt_root1.Text += " - " + CStr(-root1) + " i"
+                txt_root2.Text += " + " + CStr(-root1) + " i"
+
+            Else
+                txt_root1.Text += " + " + CStr(root1) + " i"
+                txt_root2.Text += " - " + CStr(root1) + " i"
+            End If
+
+
+        ElseIf D = 0 Then
+            root1 = -b_step / (2 * a_step)
+            root1 = Math.Round(root1, precision)
+
+            txt_root1.Text = CStr(root1)
+
+        Else
+            D = Math.Sqrt(D)
+            root1 = -b_step + D
+            root1 /= 2 * a_step
+
+            root1 = Math.Round(root1, precision)
+            
+            txt_root1.Text = CStr(root1)
+            
+        End If
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        lbl_step.Text = "Step 2 : "
+        ctr2 = 0
+
+        Dim term_a As String
+        If a_step < 0 Then
+            term_a = "(" + CStr(a_step) + ")"
+        Else
+            term_a = CStr(a_step)
+        End If
+
+        Dim D1 As Decimal
+
+        D1 = ((b_step * b_step) - (4 * a_step * c_step))
+
+        Dim term1 As String
+        If b_step < 0 Then
+            term1 = CStr(-1 * b_step)
+        Else
+            term1 = "-" + CStr(b_step)
+        End If
+
+        Dim term2 As String
+        term2 = ""
+        If D1 < 0 Then
+            term2 += CStr(Math.Round(Math.Sqrt(-D1), precision)) + " i "
+        Else
+            term2 += CStr(Math.Round(Math.Sqrt(D1), precision))
+        End If
+
+
+
+        Label5.Text = "Ist root = (-b+√D)/(2 * a)"
+        Label4.Text = " = (" + term1 + " + " + term2 + ") / ( 2 * " + term_a + ")"
+        Label8.Text = " = " + txt_root1.Text
 
 
 
@@ -635,38 +921,32 @@
 
 
 
+    End Sub
+
+    Private Sub step3(sender As Object, e As EventArgs)
 
 
 
+    End Sub
+
+    Private Sub see_again_Click(sender As Object, e As EventArgs) Handles see_again.Click
+
+    End Sub
+    Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
+
+        If lbl_step.Text = "Step 1 : " Then
+
+            check = 2
+
+            Label6.Visible = False
+            Label4.Visible = False
+            Label8.Visible = False
+
+            step2(sender, e)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        End If
 
 
     End Sub
