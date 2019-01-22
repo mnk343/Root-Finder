@@ -632,6 +632,13 @@
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
 
+        If btn_0.Checked = True Then
+            precision = 0
+        ElseIf btn_3.Checked = True Then
+            precision = 3
+        Else
+            precision = 6
+        End If
         Dim a As Decimal
         Dim b As Decimal
         Dim c As Decimal
@@ -805,9 +812,11 @@
 
     Private Sub step2(sender As Object, e As EventArgs)
 
+        check = 2
 
         Dim root1 As Decimal
 
+        txt_root1.Text = String.Empty
 
         Dim D As Decimal
         D = ((b_step * b_step) - (4 * a_step * c_step))
@@ -818,18 +827,16 @@
             root1 = Math.Round(root1, precision)
 
             txt_root1.Text = CStr(root1)
-            txt_root2.Text = CStr(root1)
 
+            D = Math.Sqrt(-D)
             root1 = D / (2 * a_step)
             root1 = Math.Round(root1, precision)
-
             If a_step < 0 Then
                 txt_root1.Text += " - " + CStr(-root1) + " i"
-                txt_root2.Text += " + " + CStr(-root1) + " i"
 
             Else
                 txt_root1.Text += " + " + CStr(root1) + " i"
-                txt_root2.Text += " - " + CStr(root1) + " i"
+
             End If
 
 
@@ -838,7 +845,6 @@
             root1 = Math.Round(root1, precision)
 
             txt_root1.Text = CStr(root1)
-
         Else
             D = Math.Sqrt(D)
             root1 = -b_step + D
@@ -847,22 +853,8 @@
             root1 = Math.Round(root1, precision)
             
             txt_root1.Text = CStr(root1)
-            
+
         End If
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         lbl_step.Text = "Step 2 : "
         ctr2 = 0
@@ -930,6 +922,26 @@
     End Sub
 
     Private Sub see_again_Click(sender As Object, e As EventArgs) Handles see_again.Click
+        ctr2 = 0
+        Label4.Visible = False
+        Label5.Visible = False
+        Label6.Visible = False
+        Label8.Visible = False
+        If lbl_step.Text = "Step 1 : " Then
+            '    check = 1
+            step1(sender, e)
+        ElseIf lbl_step.Text = "Step 2 : " Then
+            step2(sender, e)
+
+
+
+        End If
+
+
+
+
+
+
 
     End Sub
     Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
