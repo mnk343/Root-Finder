@@ -5,11 +5,11 @@
     Dim ctr2 As Integer
     Dim flag As Integer
     Dim check As Integer
-    
     Dim a_step, b_step, c_step As Decimal
 
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Height = 370
         ErrorProvider1.SetError(input_a, "Empty String!!")
         ErrorProvider1.SetError(input_b, "Empty String!!")
         ErrorProvider1.SetError(input_c, "Empty String!!")
@@ -24,7 +24,7 @@
         Me.Margin = New Padding(old.Left, old.Top, old.Right, 50)
 
         Me.AutoScroll = True
-       
+
         info.Visible = False
         info2.Visible = False
         Label3.Visible = False
@@ -43,6 +43,8 @@
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+
+        Me.Height = 370
         btnPrev.Visible = False
         see_again.Visible = False
         btnNext.Visible = False
@@ -51,7 +53,6 @@
         Label5.Visible = False
         Label8.Visible = False
         Label6.Visible = False
-
 
 
         txt_root1.Visible = False
@@ -98,7 +99,6 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSolve.Click
-
         check = -1
         btnPrev.Visible = False
         see_again.Visible = False
@@ -139,6 +139,7 @@
                 a = CDec(input_a.Text)
                 b = CDec(input_b.Text)
                 c = CDec(input_c.Text)
+                Me.Height = 500
 
                 Timer1.Start()
                 If a = 0 Then
@@ -657,6 +658,7 @@
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
 
+        Me.Height = 1000
         flag = -1
         info2.Visible = False
         txt_root1.Visible = False
@@ -844,7 +846,12 @@
         End If
 
         Label6.Text = "discriminant(D)  = b² - 4ac = " + term_b + " * " + term_b + " - " + "4 *" + term_a + " * " + term_c
-        Label4.Text = "= " + CStr(b_step * b_step) + " - " + CStr(4 * a_step * c_step)
+        If 4 * a_step * c_step < 0 Then
+            Label4.Text = "= " + CStr(b_step * b_step) + " + " + CStr(-4 * a_step * c_step)
+        Else
+            Label4.Text = "= " + CStr(b_step * b_step) + " - " + CStr(4 * a_step * c_step)
+        End If
+
         Label8.Text = "= " + CStr(D)
 
 
@@ -977,7 +984,7 @@
             txt_root2.Text = CStr(root2)
         Else
             D = Math.Sqrt(D)
-            root2 = -b_step + D
+            root2 = -b_step - D
             root2 /= 2 * a_step
 
             root2 = Math.Round(root2, precision)
@@ -1016,9 +1023,9 @@
         End If
 
 
-        Label5.Text = "2nd root = (-b-√D)/(2 * a)"
-        Label4.Text = " = (" + term1 + " + " + term2 + ") / ( 2 * " + term_a + ")"
-        Label8.Text = " = " + txt_root2.Text
+            Label5.Text = "2nd root = (-b-√D)/(2 * a)"
+        Label4.Text = " = (" + term1 + " - " + term2 + ") / ( 2 * " + term_a + ")"
+            Label8.Text = " = " + txt_root2.Text
 
 
     End Sub
@@ -1060,8 +1067,10 @@
             check = 3
             step3(sender, e)
 
-        ElseIf lbl_step.Text = "Step 2 : " Then
-            MessageBox.Show("Hurray!! You have reached the last step !!")
+        ElseIf lbl_step.Text = "Step 3 : " Then
+            MessageBox.Show("Hurray!! You have reached the last step !! Proceeding to the final answer")
+
+            Button1_Click(sender, e)
 
         End If
 
@@ -1095,6 +1104,10 @@
 
         End If
 
+
+    End Sub
+
+    Private Sub btn_3_CheckedChanged(sender As Object, e As EventArgs) Handles btn_3.CheckedChanged
 
     End Sub
 End Class
