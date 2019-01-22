@@ -13,6 +13,7 @@
         ErrorProvider1.SetError(input_a, "Empty String!!")
         ErrorProvider1.SetError(input_b, "Empty String!!")
         ErrorProvider1.SetError(input_c, "Empty String!!")
+        Chart1.Visible = False
 
         btnPrev.Visible = False
         see_again.Visible = False
@@ -43,6 +44,7 @@
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        Chart1.Visible = False
 
         Me.Height = 370
         btnPrev.Visible = False
@@ -99,6 +101,8 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSolve.Click
+        Chart1.Visible = False
+
         check = -1
         btnPrev.Visible = False
         see_again.Visible = False
@@ -657,6 +661,7 @@
     End Sub
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+        Chart1.Visible = False
 
         Me.Height = 1000
         flag = -1
@@ -1108,6 +1113,42 @@
     End Sub
 
     Private Sub btn_3_CheckedChanged(sender As Object, e As EventArgs) Handles btn_3.CheckedChanged
+
+    End Sub
+
+    Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
+
+        
+        Chart1.Visible = True
+
+        Me.Height = 1000
+        btnPrev.Visible = False
+        see_again.Visible = False
+        btnNext.Visible = False
+
+        Label4.Visible = False
+        Label5.Visible = False
+        Label8.Visible = False
+        Label6.Visible = False
+
+
+        txt_root1.Visible = False
+        txt_root2.Visible = False
+        Label7.Visible = False
+        lbltext.Visible = False
+        info2.Visible = False
+        info.Visible = False
+
+        flag = -1
+        check = -1
+
+
+
+
+
+
+
+
 
     End Sub
 End Class

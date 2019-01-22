@@ -24,6 +24,8 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
         Me.title = New System.Windows.Forms.Label()
         Me.equation = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -62,9 +64,12 @@ Partial Class Form1
         Me.see_again = New System.Windows.Forms.Button()
         Me.btnNext = New System.Windows.Forms.Button()
         Me.btnPrev = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ErrorProvider2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ErrorProvider3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Chart1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'title
@@ -156,7 +161,7 @@ Partial Class Form1
         'btnSolve
         '
         Me.btnSolve.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSolve.Location = New System.Drawing.Point(229, 204)
+        Me.btnSolve.Location = New System.Drawing.Point(174, 204)
         Me.btnSolve.Name = "btnSolve"
         Me.btnSolve.Size = New System.Drawing.Size(145, 23)
         Me.btnSolve.TabIndex = 11
@@ -166,7 +171,7 @@ Partial Class Form1
         'btnClear
         '
         Me.btnClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnClear.Location = New System.Drawing.Point(425, 204)
+        Me.btnClear.Location = New System.Drawing.Point(499, 204)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(133, 23)
         Me.btnClear.TabIndex = 12
@@ -176,7 +181,7 @@ Partial Class Form1
         'btnExit
         '
         Me.btnExit.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnExit.Location = New System.Drawing.Point(613, 204)
+        Me.btnExit.Location = New System.Drawing.Point(666, 204)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(112, 23)
         Me.btnExit.TabIndex = 13
@@ -292,7 +297,7 @@ Partial Class Form1
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Rockwell", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(298, 331)
+        Me.Label7.Location = New System.Drawing.Point(298, 323)
         Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(177, 27)
@@ -345,7 +350,7 @@ Partial Class Form1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(56, 204)
+        Me.Button1.Location = New System.Drawing.Point(26, 204)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(123, 23)
         Me.Button1.TabIndex = 37
@@ -415,11 +420,35 @@ Partial Class Form1
         Me.btnPrev.Text = "Previous"
         Me.btnPrev.UseVisualStyleBackColor = True
         '
+        'Button2
+        '
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(360, 204)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(112, 23)
+        Me.Button2.TabIndex = 43
+        Me.Button2.Text = "Graph"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Chart1
+        '
+        ChartArea1.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend1)
+        Me.Chart1.Location = New System.Drawing.Point(121, 317)
+        Me.Chart1.Name = "Chart1"
+        Me.Chart1.Size = New System.Drawing.Size(571, 352)
+        Me.Chart1.TabIndex = 44
+        Me.Chart1.Text = "Chart1"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(811, 703)
+        Me.Controls.Add(Me.Chart1)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.btnPrev)
         Me.Controls.Add(Me.btnNext)
         Me.Controls.Add(Me.see_again)
@@ -457,6 +486,7 @@ Partial Class Form1
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ErrorProvider2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ErrorProvider3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Chart1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -499,5 +529,7 @@ Partial Class Form1
     Friend WithEvents btnNext As System.Windows.Forms.Button
     Friend WithEvents see_again As System.Windows.Forms.Button
     Friend WithEvents btnPrev As System.Windows.Forms.Button
+    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents Chart1 As System.Windows.Forms.DataVisualization.Charting.Chart
 
 End Class
