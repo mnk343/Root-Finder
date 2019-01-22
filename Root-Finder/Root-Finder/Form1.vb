@@ -47,13 +47,21 @@
         see_again.Visible = False
         btnNext.Visible = False
 
+        Label4.Visible = False
+        Label5.Visible = False
+        Label8.Visible = False
+        Label6.Visible = False
+
+
+
         txt_root1.Visible = False
         txt_root2.Visible = False
         Label7.Visible = False
         lbltext.Visible = False
         info2.Visible = False
 
-        flag = 1
+        flag = -1
+        check = -1
         info.Visible = False
         info2.Visible = False
         txt_root1.Visible = False
