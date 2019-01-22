@@ -46,10 +46,11 @@
 
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnClear.Click 'module to clear all values when butten clear clicked
+        'make all the extra visible things invisuble 
         Chart1.Visible = False
         status = 0
-        Me.Height = 370
+        Me.Height = 370 'decrease the height 
         btnPrev.Visible = False
         see_again.Visible = False
         btnNext.Visible = False
@@ -78,10 +79,11 @@
         lbl_step.Visible = False
         Label5.Visible = False
         Label7.Visible = False
-
+        'show a msg box if all the inputs are already empty
         If input_a.Text = String.Empty And input_b.Text = String.Empty And input_c.Text = String.Empty Then
             MessageBox.Show("Values were empty already !!")
 
+            'clear inputs in the text box
         Else
             input_a.Clear()
             input_b.Clear()
@@ -89,7 +91,7 @@
             MessageBox.Show("All the values of the coefficients have been cleared !!")
         End If
 
-
+        'show error provider for each input box saying empty
         ErrorProvider1.SetError(input_a, "Empty String!!")
         ErrorProvider3.SetError(input_a, "")
 
@@ -103,7 +105,9 @@
 
     End Sub
 
+    'module to display the solution step by step
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSolve.Click
+        'make everythin invisible
         Chart1.Visible = False
         status = 1
         Me.Height = 370
@@ -129,6 +133,7 @@
         txt_root2.Visible = False
         lbltext.Visible = False
 
+        'fix the precision using the button clicked
         If btn_0.Checked = True Then
             precision = 0
         ElseIf btn_3.Checked = True Then
@@ -143,15 +148,17 @@
         Dim c As Decimal
 
         Dim test1, test2, test3 As Decimal
+        'if all the inputs are decimals then 
         If Decimal.TryParse(input_a.Text, test1) And Decimal.TryParse(input_b.Text, test2) And Decimal.TryParse(input_c.Text, test3) Then
-            Try
+            Try 'try to catch an exception 
                 a = CDec(input_a.Text)
                 b = CDec(input_b.Text)
                 c = CDec(input_c.Text)
 
-                Timer1.Start()
-                Me.Height = 500
+                Timer1.Start() 'start the timer so as to print the answer with a time gap
+                Me.Height = 500 'increase the height
 
+                'if the given inputs doesnt form a quadratic eqn then show error
                 If a = 0 Then
                     info.BackColor = Color.White
 
@@ -168,7 +175,7 @@
                             info.Text = " No roots exist for the equation " + CStr(c) + " = 0 "
                         End If
 
-                    Else
+                    Else 'if the inputs form a qudratic eqn then print make the visiblity of the solution true
                         info.Visible = True
                         info2.Visible = True
                         info.Text = "The equation " + CStr(b) + "x + " + CStr(c) + " = 0 has one root . "
@@ -183,6 +190,7 @@
                     info2.Text = "The roots are : "
                     Dim show_a, show_b, show_c As String
 
+                    'to print the 
                     If a < 0 Then
                         show_a = "- " + CStr(-a)
                     Else
@@ -214,6 +222,7 @@
                     D = ((b * b) - (4 * a * c))
 
                     Dim term_b As String
+                    'put brackets if value is negative as to show neatly
                     If b < 0 Then
                         term_b = "(" + CStr(b) + ")"
                     Else
@@ -237,18 +246,18 @@
                     If D < 0 Then
 
                         info.Text += "Imaginary"
-                        info.BackColor = Color.Yellow
+                        info.BackColor = Color.Yellow 'show yellow colour in background if roots are imaginary
 
                         D = Math.Sqrt(-D)
 
                         root1 = (-1 * b) / (2 * a)
-                        root1 = Math.Round(root1, precision)
+                        root1 = Math.Round(root1, precision) 'take the solution according to the precision
 
                         txt_root1.Text = CStr(root1)
                         txt_root2.Text = CStr(root1)
 
                         root1 = D / (2 * a)
-                        root1 = Math.Round(root1, precision)
+                        root1 = Math.Round(root1, precision) 'take the solution according to the precision
 
                         If a < 0 Then
                             txt_root1.Text += " - " + CStr(-root1) + " i"
@@ -942,13 +951,20 @@
 
             txt_root1.Text = CStr(root1)
         Else
-            D = Math.Sqrt(D)
-            root1 = -b_step + D
-            root1 /= 2 * a_step
+            Try
 
-            root1 = Math.Round(root1, precision)
-            
-            txt_root1.Text = CStr(root1)
+
+                D = Math.Sqrt(D)
+                root1 = -b_step + D
+                root1 /= 2 * a_step
+
+                root1 = Math.Round(root1, precision)
+
+                txt_root1.Text = CStr(root1)
+            Catch ex As Exception
+                MessageBox.Show("s")
+
+            End Try
 
         End If
 
@@ -987,7 +1003,7 @@
         Label4.Text = " = (" + term1 + " + " + term2 + ") / ( 2 * " + term_a + ")"
         Label8.Text = " = " + txt_root1.Text
 
-        
+
     End Sub
 
     Private Sub step3(sender As Object, e As EventArgs)
@@ -1202,6 +1218,29 @@
                 b = CDec(input_b.Text)
                 c = CDec(input_c.Text)
 
+                Dim show_a, show_b, show_c As String
+
+                If a < 0 Then
+                    show_a = "- " + CStr(-a)
+                Else
+                    show_a = " + " + CStr(a)
+                End If
+
+
+                If b < 0 Then
+                    show_b = " - " + CStr(-b)
+                Else
+                    show_b = " + " + CStr(b)
+                End If
+
+
+                If c < 0 Then
+                    show_c = "- " + CStr(-c)
+                Else
+                    show_c = " + " + CStr(c)
+                End If
+
+
                 Dim vertex As Decimal
                 If a = 0 Then
                     If b = 0 Then
@@ -1225,12 +1264,14 @@
 
                 'specify series plot lines
                 Chart1.Series.Clear()
-                Chart1.Series.Add("plot")
-                Chart1.Series("plot").Color = Color.Red
-                Chart1.Series("plot").ChartType = DataVisualization.Charting.SeriesChartType.Line
+                Chart1.Series.Add(show_a + " x²" + show_b + " x" + show_c)
+                Chart1.Series(show_a + " x²" + show_b + " x" + show_c).Color = Color.Red
+                Chart1.Series(show_a + " x²" + show_b + " x" + show_c).ChartType = DataVisualization.Charting.SeriesChartType.Line
 
                 'add data to the series
 
+                Chart1.ChartAreas(0).AxisX.LabelStyle.Format = "#.##"
+                Chart1.ChartAreas(0).AxisY.LabelStyle.Format = "#.##"
 
                 Dim left As Decimal = vertex - 5
                 Dim right As Decimal = vertex + 5
@@ -1238,7 +1279,7 @@
 
                 For x As Decimal = left To right Step 0.1
                     y = a * x * x + b * x + c
-                    Chart1.Series("plot1").Points.AddXY(x, y)
+                    Chart1.Series(show_a + " x²" + show_b + " x" + show_c).Points.AddXY(x, y)
                 Next
 
             Catch ex As Exception
