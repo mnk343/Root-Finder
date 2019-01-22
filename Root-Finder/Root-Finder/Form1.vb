@@ -4,6 +4,8 @@
     Dim ctr As Integer
     Dim ctr2 As Integer
     Dim flag As Integer
+    Dim status As Integer
+
     Dim check As Integer
     Dim a_step, b_step, c_step As Decimal
 
@@ -14,6 +16,7 @@
         ErrorProvider1.SetError(input_b, "Empty String!!")
         ErrorProvider1.SetError(input_c, "Empty String!!")
         Chart1.Visible = False
+        status = 0
 
         btnPrev.Visible = False
         see_again.Visible = False
@@ -45,7 +48,7 @@
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         Chart1.Visible = False
-
+        status = 0
         Me.Height = 370
         btnPrev.Visible = False
         see_again.Visible = False
@@ -102,6 +105,7 @@
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSolve.Click
         Chart1.Visible = False
+        status = 1
 
         check = -1
         btnPrev.Visible = False
@@ -646,22 +650,74 @@
 
     Private Sub btn_6_Click(sender As Object, e As EventArgs) Handles btn_6.Click
 
-        Button1_Click(sender, e)
+        precision = 6
+        If status = 1 Then
+            Button1_Click(sender, e)
+        ElseIf status = 2 Then
+
+            If (check = 1) Then
+                step1(sender, e)
+            ElseIf check = 2 Then
+                step2(sender, e)
+            ElseIf check = 3 Then
+                step3(sender, e)
+            Else
+                Button1_Click_1(sender, e)
+            End If
+
+        End If
 
     End Sub
 
     Private Sub btn_3_Click(sender As Object, e As EventArgs) Handles btn_3.Click
-        Button1_Click(sender, e)
+
+        precision = 3
+
+        If status = 1 Then
+            Button1_Click(sender, e)
+        ElseIf status = 2 Then
+
+            If (check = 1) Then
+                step1(sender, e)
+            ElseIf check = 2 Then
+                step2(sender, e)
+            ElseIf check = 3 Then
+                step3(sender, e)
+            Else
+                Button1_Click_1(sender, e)
+            End If
+
+        End If
 
     End Sub
 
     Private Sub btn_0_Click(sender As Object, e As EventArgs) Handles btn_0.Click
-        Button1_Click(sender, e)
+
+        precision = 0
+
+        If status = 1 Then
+            Button1_Click(sender, e)
+        ElseIf status = 2 Then
+
+            If (check = 1) Then
+                step1(sender, e)
+            ElseIf check = 2 Then
+                step2(sender, e)
+            ElseIf check = 3 Then
+                step3(sender, e)
+            Else
+                Button1_Click_1(sender, e)
+            End If
+
+        End If
+
 
     End Sub
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
         Chart1.Visible = False
+
+        status = 2
 
         Me.Height = 1000
         flag = -1
@@ -1118,6 +1174,7 @@
 
     Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
 
+        status = 0
         
         Chart1.Visible = True
 
@@ -1149,6 +1206,10 @@
 
 
 
+
+    End Sub
+
+    Private Sub btn_0_CheckedChanged(sender As Object, e As EventArgs) Handles btn_0.CheckedChanged
 
     End Sub
 End Class
