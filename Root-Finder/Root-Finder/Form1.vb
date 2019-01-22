@@ -749,23 +749,8 @@
 
 
                 If a = 0 Then
-                    MessageBox.Show("Warning : You have not entered a quadratic equation !!")
-                    If b = 0 Then
-                        If c = 0 Then
-                            info.Visible = True
-                            info.Text = " Infinite roots are possible for the equation 0 = 0 "
-                        Else
-                            info.Visible = True
-                            info.Text = " No roots exist for the equation " + CStr(c) + " = 0 "
-                        End If
+                    Button1_Click(sender, e)
 
-                    Else
-                        info.Visible = True
-                        info2.Visible = True
-                        info.Text = "The equation " + CStr(b) + "x + " + CStr(c) + " = 0 has one root . "
-                        info2.Text = " The only root is : " + CStr(Math.Round(-c / b, precision))
-
-                    End If
                 Else
                     Dim show_a, show_b, show_c As String
 
